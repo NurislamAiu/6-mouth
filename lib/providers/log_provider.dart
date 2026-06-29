@@ -9,6 +9,13 @@ final logControllerProvider =
       return LogController(Hive.box('logs'));
     });
 
+/// Sync read of today's log from the cached list — no loading state.
+final todayLogSyncProvider = Provider<DayLogModel?>((ref) {
+  final logs = ref.watch(logControllerProvider);
+  final todayKey = DayLogModel.keyForDate(DateTime.now());
+  return logs.where((log) => log.key == todayKey).firstOrNull;
+});
+
 final todayLogProvider = FutureProvider<DayLogModel>((ref) async {
   final goal = ref.watch(goalControllerProvider);
   final logs = ref.watch(logControllerProvider);

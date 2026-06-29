@@ -65,7 +65,7 @@ class _MonthRowState extends State<MonthRow> {
                         borderRadius: BorderRadius.circular(100),
                       ),
                       child: Text(
-                        'NOW',
+                        'СЕЙЧАС',
                         style: AppTheme.labelStyle.copyWith(
                           color: AppTheme.background,
                           letterSpacing: 2,
@@ -73,7 +73,7 @@ class _MonthRowState extends State<MonthRow> {
                       ),
                     )
                   else
-                    Text('LOCKED', style: AppTheme.labelStyle),
+                    Text('ЗАКРЫТ', style: AppTheme.labelStyle),
                 ],
               ),
               AnimatedCrossFade(
@@ -83,7 +83,7 @@ class _MonthRowState extends State<MonthRow> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      widget.summary ?? 'Reflection summary is building.',
+                      widget.summary ?? 'Итог рефлексии формируется.',
                       style: AppTheme.secondaryStyle,
                     ),
                   ),

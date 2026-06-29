@@ -26,9 +26,9 @@ class ProgressScreen extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(20, 18, 20, 28),
         children: [
           AppHeader(
-            title: 'Progress',
-            trailing: 'LVL ${gamification.level}',
-            subtitle: 'Your proof is stacking.',
+            title: 'Прогресс',
+            trailing: 'УРВ ${gamification.level}',
+            subtitle: 'Твои доказательства накапливаются.',
           ),
           const SizedBox(height: 18),
           LevelCard(gamification: gamification),
@@ -37,11 +37,11 @@ class ProgressScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('NEXT UNLOCK', style: AppTheme.labelStyle),
+                Text('СЛЕДУЮЩЕЕ ДОСТИЖЕНИЕ', style: AppTheme.labelStyle),
                 const SizedBox(height: 14),
                 Text(
                   nextBadge.isEmpty
-                      ? 'All current achievements are unlocked.'
+                      ? 'Все достижения разблокированы.'
                       : nextBadge.first.title,
                   style: AppTheme.bodyStyle.copyWith(
                     fontSize: 24,
@@ -52,7 +52,7 @@ class ProgressScreen extends ConsumerWidget {
                 const SizedBox(height: 8),
                 Text(
                   nextBadge.isEmpty
-                      ? 'Keep stacking daily wins.'
+                      ? 'Продолжай накапливать ежедневные победы.'
                       : nextBadge.first.subtitle,
                   style: AppTheme.secondaryStyle,
                 ),
@@ -66,16 +66,16 @@ class ProgressScreen extends ConsumerWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: _ProgressMetric(label: 'WINS', value: '$completed'),
+                  child: _ProgressMetric(label: 'ПОБЕДЫ', value: '$completed'),
                 ),
                 Container(width: 1, height: 42, color: AppTheme.border),
                 Expanded(
-                  child: _ProgressMetric(label: 'NOTES', value: '$reflections'),
+                  child: _ProgressMetric(label: 'ЗАПИСИ', value: '$reflections'),
                 ),
                 Container(width: 1, height: 42, color: AppTheme.border),
                 Expanded(
                   child: _ProgressMetric(
-                    label: 'SCORE',
+                    label: 'СЧЁТ',
                     value: '${gamification.todayScore}',
                   ),
                 ),

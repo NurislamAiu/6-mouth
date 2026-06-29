@@ -28,7 +28,7 @@ class CoachScreen extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(20, 18, 20, 28),
         children: [
           AppHeader(
-            title: 'Coach',
+            title: 'Коуч',
             trailing: 'AI',
             subtitle: _coachLine(gamification.todayScore),
           ),
@@ -37,7 +37,7 @@ class CoachScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('TODAY FOCUS', style: AppTheme.labelStyle),
+                Text('ФОКУС ДНЯ', style: AppTheme.labelStyle),
                 const SizedBox(height: 16),
                 Text(
                   _focusFor(gamification.todayScore),
@@ -51,29 +51,29 @@ class CoachScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('CLOSE THE DAY', style: AppTheme.labelStyle),
+                Text('ЗАКРЫТЬ ДЕНЬ', style: AppTheme.labelStyle),
                 const SizedBox(height: 16),
                 _CoachStep(
                   number: '01',
                   text: gamification.todayScore >= 60
-                      ? 'Task is complete.'
-                      : 'Complete the task on Today.',
+                      ? 'Задача выполнена.'
+                      : 'Выполни задачу в разделе Сегодня.',
                   done: gamification.todayScore >= 60,
                 ),
                 const SizedBox(height: 12),
                 _CoachStep(
                   number: '02',
                   text: gamification.todayScore >= 80
-                      ? 'Check-in is complete.'
-                      : 'Answer the identity check.',
+                      ? 'Проверка завершена.'
+                      : 'Ответь на проверку.',
                   done: gamification.todayScore >= 80,
                 ),
                 const SizedBox(height: 12),
                 _CoachStep(
                   number: '03',
                   text: gamification.todayScore == 100
-                      ? 'Reflection is complete.'
-                      : 'Write one honest reflection.',
+                      ? 'Рефлексия завершена.'
+                      : 'Напиши одну честную рефлексию.',
                   done: gamification.todayScore == 100,
                 ),
               ],
@@ -84,10 +84,10 @@ class CoachScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('GOAL LENS', style: AppTheme.labelStyle),
+                Text('МОЯ ЦЕЛЬ', style: AppTheme.labelStyle),
                 const SizedBox(height: 16),
                 Text(
-                  goal?.goal ?? 'Your goal will appear here.',
+                  goal?.goal ?? 'Твоя цель появится здесь.',
                   style: AppTheme.bodyStyle,
                 ),
               ],
@@ -98,11 +98,11 @@ class CoachScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('LAST REFLECTION', style: AppTheme.labelStyle),
+                Text('ПОСЛЕДНЯЯ РЕФЛЕКСИЯ', style: AppTheme.labelStyle),
                 const SizedBox(height: 16),
                 Text(
                   lastReflection ??
-                      'Write one reflection today and it will show here.',
+                      'Напиши рефлексию сегодня, и она появится здесь.',
                   style: AppTheme.secondaryStyle.copyWith(
                     color: AppTheme.primaryText,
                   ),
@@ -116,19 +116,19 @@ class CoachScreen extends ConsumerWidget {
   }
 
   String _coachLine(int score) {
-    if (score == 100) return 'Good. Protect the streak tomorrow.';
-    if (score >= 60) return 'Main action done. Close the loop.';
-    return 'Do the smallest real action now.';
+    if (score == 100) return 'Хорошо. Защити серию завтра.';
+    if (score >= 60) return 'Главное сделано. Закрой петлю.';
+    return 'Сделай наименьшее реальное действие сейчас.';
   }
 
   String _focusFor(int score) {
     if (score == 100) {
-      return 'You already won today. Keep the promise small tomorrow so the chain stays alive.';
+      return 'Ты уже победил сегодня. Держи обещание маленьким завтра, чтобы цепь оставалась живой.';
     }
     if (score >= 60) {
-      return 'The task is handled. Answer the check-in and leave one honest line before the day ends.';
+      return 'Задача выполнена. Ответь на проверку и оставь одну честную строку до конца дня.';
     }
-    return 'Ignore the full plan for a moment. Complete the one task on Today and claim the win.';
+    return 'Забудь о полном плане на минуту. Выполни одну задачу в разделе Сегодня и возьми победу.';
   }
 }
 

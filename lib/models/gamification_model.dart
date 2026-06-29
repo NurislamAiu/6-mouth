@@ -65,23 +65,23 @@ GamificationModel buildGamification(List<DayLogModel> logs) {
     recentDays: _recentDays(logs),
     badges: [
       BadgeModel(
-        title: 'FIRST WIN',
-        subtitle: 'Complete one task',
+        title: 'ПЕРВАЯ ПОБЕДА',
+        subtitle: 'Выполни одну задачу',
         unlocked: completed >= 1,
       ),
       BadgeModel(
-        title: '3 DAY RUN',
-        subtitle: 'Hold a 3-day streak',
+        title: 'СЕРИЯ 3 ДНЯ',
+        subtitle: 'Удержи серию 3 дня',
         unlocked: streak >= 3,
       ),
       BadgeModel(
-        title: '10 TASKS',
-        subtitle: 'Stack ten wins',
+        title: '10 ЗАДАЧ',
+        subtitle: 'Накопи десять побед',
         unlocked: completed >= 10,
       ),
       BadgeModel(
-        title: 'HONEST LOG',
-        subtitle: 'Write five reflections',
+        title: 'ЧЕСТНЫЙ ЛОГ',
+        subtitle: 'Напиши пять рефлексий',
         unlocked: reflections >= 5,
       ),
     ],

@@ -66,7 +66,7 @@ class PurchaseController extends StateNotifier<PurchaseState> {
     } on Object {
       state = state.copyWith(
         productLoading: false,
-        error: 'Store is not available in this build.',
+        error: 'Магазин недоступен в этой версии.',
       );
     }
   }
@@ -75,7 +75,7 @@ class PurchaseController extends StateNotifier<PurchaseState> {
     final product = state.product;
     if (product == null) {
       state = state.copyWith(
-        error: 'Store product is not available yet.',
+        error: 'Товар в магазине ещё недоступен.',
         loading: false,
       );
       return;
@@ -86,7 +86,7 @@ class PurchaseController extends StateNotifier<PurchaseState> {
     } on Object {
       state = state.copyWith(
         loading: false,
-        error: 'Purchase could not be started.',
+        error: 'Не удалось начать покупку.',
       );
     }
   }
@@ -97,7 +97,7 @@ class PurchaseController extends StateNotifier<PurchaseState> {
       await _service.restore().timeout(const Duration(seconds: 8));
       state = state.copyWith(loading: false);
     } on Object {
-      state = state.copyWith(loading: false, error: 'Nothing to restore yet.');
+      state = state.copyWith(loading: false, error: 'Нечего восстанавливать.');
     }
   }
 
@@ -115,7 +115,7 @@ class PurchaseController extends StateNotifier<PurchaseState> {
       if (purchase.status == PurchaseStatus.error) {
         state = state.copyWith(
           loading: false,
-          error: purchase.error?.message ?? 'Purchase failed.',
+          error: purchase.error?.message ?? 'Покупка не удалась.',
         );
       }
       await _service.complete(purchase);

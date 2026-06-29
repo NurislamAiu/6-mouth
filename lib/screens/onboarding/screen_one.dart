@@ -36,7 +36,7 @@ class ScreenOne extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
                   Text(
-                    'months to transform',
+                    'месяцев для трансформации',
                     style: AppTheme.bodyStyle.copyWith(
                       fontSize: 26,
                       fontWeight: FontWeight.w700,
@@ -47,7 +47,7 @@ class ScreenOne extends StatelessWidget {
                   SizedBox(
                     width: 260,
                     child: Text(
-                      'One goal. One task a day. One clean 180-day line.',
+                      'Одна цель. Одна задача в день. Чистые 180 дней.',
                       textAlign: TextAlign.center,
                       style: AppTheme.secondaryStyle,
                     ),
@@ -56,7 +56,7 @@ class ScreenOne extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            AppButton(label: 'Begin', onPressed: onNext, filled: true),
+            AppButton(label: 'Начать', onPressed: onNext, filled: true),
           ],
         ),
       ),

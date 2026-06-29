@@ -24,7 +24,7 @@ class LevelCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('LEVEL', style: AppTheme.labelStyle),
+                    Text('УРОВЕНЬ', style: AppTheme.labelStyle),
                     const SizedBox(height: 10),
                     Text(
                       '${gamification.level}',
@@ -62,7 +62,7 @@ class LevelCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            '${gamification.xpIntoLevel}/${gamification.xpForNextLevel} XP TO NEXT LEVEL',
+            '${gamification.xpIntoLevel}/${gamification.xpForNextLevel} XP ДО СЛ. УРОВНЯ',
             style: AppTheme.labelStyle.copyWith(
               color: AppTheme.secondaryText,
               letterSpacing: 2,
@@ -86,12 +86,12 @@ class CompactGameStrip extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: _CompactMetric(label: 'LVL', value: '${gamification.level}'),
+            child: _CompactMetric(label: 'УРВ', value: '${gamification.level}'),
           ),
           Container(width: 1, height: 34, color: AppTheme.border),
           Expanded(
             child: _CompactMetric(
-              label: 'SCORE',
+              label: 'СЧЁТ',
               value: '${gamification.todayScore}',
             ),
           ),
@@ -176,7 +176,7 @@ class DailyScoreCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('DAILY SCORE', style: AppTheme.labelStyle),
+                Text('СЧЁТ ДНЯ', style: AppTheme.labelStyle),
                 const SizedBox(height: 8),
                 Text(
                   _messageFor(score),
@@ -193,10 +193,10 @@ class DailyScoreCard extends StatelessWidget {
   }
 
   String _messageFor(int score) {
-    if (score == 100) return 'Perfect day. XP locked in.';
-    if (score >= 60) return 'Main win secured. Finish the check-in.';
-    if (score >= 20) return 'You started. Complete the task.';
-    return 'Score the day with one action.';
+    if (score == 100) return 'Идеальный день. XP зафиксированы.';
+    if (score >= 60) return 'Главная победа. Заверши проверку.';
+    if (score >= 20) return 'Ты начал. Выполни задачу.';
+    return 'Набери очки одним действием.';
   }
 }
 
@@ -212,7 +212,7 @@ class StreakPulseCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('7 DAY PULSE', style: AppTheme.labelStyle),
+          Text('ПУЛЬС 7 ДНЕЙ', style: AppTheme.labelStyle),
           const SizedBox(height: 18),
           Row(
             children: days.map((day) {
@@ -246,7 +246,7 @@ class StreakPulseCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      day.isToday ? 'NOW' : _weekday(day.date),
+                      day.isToday ? 'СЕЙ' : _weekday(day.date),
                       style: AppTheme.labelStyle.copyWith(
                         fontSize: 9,
                         color: day.isToday
@@ -266,7 +266,7 @@ class StreakPulseCard extends StatelessWidget {
   }
 
   String _weekday(DateTime date) {
-    const names = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    const names = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
     return names[date.weekday - 1];
   }
 }
@@ -283,7 +283,7 @@ class BadgeShelf extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('ACHIEVEMENTS', style: AppTheme.labelStyle),
+          Text('ДОСТИЖЕНИЯ', style: AppTheme.labelStyle),
           const SizedBox(height: 16),
           ...badges.map(
             (badge) => Padding(

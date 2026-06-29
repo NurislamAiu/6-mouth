@@ -50,6 +50,7 @@ final hasOnboardedProvider = Provider<bool>((ref) {
   return Hive.box('app').get('onboardingComplete') == true;
 });
 
+
 int currentDayFor(GoalModel goal) {
   final today = DateTime.now();
   final start = DateTime(

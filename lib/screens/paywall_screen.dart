@@ -18,7 +18,7 @@ class PaywallScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final purchase = ref.watch(purchaseControllerProvider);
     final showPreviewAccess = kDebugMode || _showDevelopmentUnlockFlag;
-    final unlockLabel = purchase.productLoading ? 'Loading price' : 'Unlock';
+    final unlockLabel = purchase.productLoading ? 'Загрузка цены' : 'Открыть';
     ref.listen(purchaseControllerProvider, (_, next) {
       if (next.unlocked) {
         Navigator.of(
@@ -36,10 +36,10 @@ class PaywallScreen extends ConsumerWidget {
             children: [
               Text('6MONTH', style: AppTheme.labelStyle),
               const Spacer(),
-              Text('180 DAYS', style: AppTheme.labelStyle),
+              Text('180 ДНЕЙ', style: AppTheme.labelStyle),
               const SizedBox(height: 18),
               Text(
-                'Unlock your transformation',
+                'Открой своё преображение',
                 style: AppTheme.bodyStyle.copyWith(fontSize: 36, height: 1.04),
               ),
               const SizedBox(height: 18),
@@ -49,7 +49,7 @@ class PaywallScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 18),
               Text(
-                'Full access forever. Your goal, logs, photos, and reflections stay local on this device.',
+                'Полный доступ навсегда. Цель, логи, фото и рефлексии хранятся локально на устройстве.',
                 style: AppTheme.secondaryStyle,
               ),
               if (purchase.error != null) ...[
@@ -75,14 +75,14 @@ class PaywallScreen extends ConsumerWidget {
                 child: Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 14),
-                    child: Text('RESTORE PURCHASE', style: AppTheme.labelStyle),
+                    child: Text('ВОССТАНОВИТЬ ПОКУПКУ', style: AppTheme.labelStyle),
                   ),
                 ),
               ),
               if (showPreviewAccess) ...[
                 const SizedBox(height: 6),
                 AppButton(
-                  label: 'Preview app',
+                  label: 'Просмотр приложения',
                   onPressed: () {
                     ref
                         .read(purchaseControllerProvider.notifier)

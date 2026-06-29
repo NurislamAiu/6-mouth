@@ -52,10 +52,10 @@ class _ScreenThreeState extends ConsumerState<ScreenThree> {
     final goal = ref.watch(onboardingStateProvider).goal;
     return OnboardingLayout(
       step: 3,
-      title: 'Write the target clearly.',
-      subtitle: 'Keep it specific enough that tomorrow has a direction.',
+      title: 'Запиши цель чётко.',
+      subtitle: 'Сделай её конкретной, чтобы завтра было направление.',
       action: AppButton(
-        label: 'Continue',
+        label: 'Продолжить',
         onPressed: goal.trim().isEmpty ? null : widget.onNext,
         filled: goal.trim().isNotEmpty,
       ),
@@ -74,7 +74,7 @@ class _ScreenThreeState extends ConsumerState<ScreenThree> {
                     .copyWith(goal: value);
               },
               decoration: const InputDecoration(
-                hintText: 'IN 6 MONTHS I WILL...',
+                hintText: 'ЧЕРЕЗ 6 МЕСЯЦЕВ Я...',
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
@@ -83,7 +83,7 @@ class _ScreenThreeState extends ConsumerState<ScreenThree> {
           ),
           const SizedBox(height: 14),
           AppButton(
-            label: 'Help me write this',
+            label: 'Помоги написать',
             onPressed: goal.trim().isEmpty ? null : _rewrite,
             loading: _loading,
           ),

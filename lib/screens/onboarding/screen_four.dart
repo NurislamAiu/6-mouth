@@ -19,11 +19,11 @@ class ScreenFour extends ConsumerWidget {
     final date = DateFormat('MMMM d, yyyy').format(DateTime.now());
     return OnboardingLayout(
       step: 4,
-      title: 'Why does this matter?',
+      title: 'Почему это важно?',
       subtitle:
-          'This is the sentence you come back to when discipline gets quiet.',
+          'Это предложение, к которому возвращаешься, когда дисциплина молчит.',
       action: AppButton(
-        label: 'Start',
+        label: 'Начать',
         onPressed: state.why.trim().isEmpty ? null : onNext,
         filled: state.why.trim().isNotEmpty,
       ),
@@ -40,7 +40,7 @@ class ScreenFour extends ConsumerWidget {
                     .copyWith(why: value);
               },
               decoration: const InputDecoration(
-                hintText: 'BECAUSE...',
+                hintText: 'ПОТОМУ ЧТО...',
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
@@ -55,7 +55,7 @@ class ScreenFour extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('STARTS TODAY', style: AppTheme.labelStyle),
+                      Text('НАЧИНАЕТСЯ СЕГОДНЯ', style: AppTheme.labelStyle),
                       const SizedBox(height: 8),
                       Text(date, style: AppTheme.secondaryStyle),
                     ],

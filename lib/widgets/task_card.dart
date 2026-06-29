@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/day_log_model.dart';
 import '../providers/log_provider.dart';
 import '../theme/app_motion.dart';
 import '../theme/app_theme.dart';
@@ -9,12 +8,12 @@ import 'app_button.dart';
 import 'app_card.dart';
 
 class TaskCard extends ConsumerWidget {
-  const TaskCard({super.key, required this.log});
-
-  final DayLogModel log;
+  const TaskCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final log = ref.watch(todayLogSyncProvider);
+    if (log == null) return const SizedBox.shrink();
     return AppCard(
       padding: const EdgeInsets.all(22),
       child: Column(
@@ -26,7 +25,7 @@ class TaskCard extends ConsumerWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  'TODAY',
+                  'СЕГОДНЯ',
                   style: AppTheme.labelStyle.copyWith(
                     color: AppTheme.secondaryText,
                   ),
@@ -47,7 +46,7 @@ class TaskCard extends ConsumerWidget {
                   border: Border.all(color: AppTheme.border),
                 ),
                 child: Text(
-                  log.taskDone ? 'DONE' : '+60 XP',
+                  log.taskDone ? 'ГОТОВО' : '+60 XP',
                   style: AppTheme.labelStyle.copyWith(
                     color: log.taskDone
                         ? AppTheme.background
@@ -88,13 +87,12 @@ class TaskCard extends ConsumerWidget {
           ),
           const SizedBox(height: 28),
           AppButton(
-            label: log.taskDone ? 'Completed' : 'Complete task',
+            label: log.taskDone ? 'Выполнено' : 'Выполнить задачу',
             filled: log.taskDone,
             onPressed: () {
               ref
                   .read(logControllerProvider.notifier)
                   .upsert(log.copyWith(taskDone: !log.taskDone));
-              ref.invalidate(todayLogProvider);
             },
           ),
         ],

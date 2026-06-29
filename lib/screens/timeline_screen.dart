@@ -11,12 +11,12 @@ class TimelineScreen extends ConsumerWidget {
   const TimelineScreen({super.key});
 
   static const _months = [
-    'Foundation',
-    'Consistency',
-    'Momentum',
-    'Expansion',
-    'Pressure',
-    'Identity',
+    'Фундамент',
+    'Постоянство',
+    'Импульс',
+    'Расширение',
+    'Давление',
+    'Идентичность',
   ];
 
   @override
@@ -31,7 +31,7 @@ class TimelineScreen extends ConsumerWidget {
         padding: const EdgeInsets.fromLTRB(20, 18, 20, 28),
         children: [
           AppHeader(
-            title: 'Timeline',
+            title: 'Таймлайн',
             trailing: '${(progress * 100).round()}%',
             subtitle: _months[currentMonth - 1],
           ),
@@ -40,7 +40,7 @@ class TimelineScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('YOUR 6 MONTHS', style: AppTheme.labelStyle),
+                Text('ТВОИ 6 МЕСЯЦЕВ', style: AppTheme.labelStyle),
                 const SizedBox(height: 18),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(100),

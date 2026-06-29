@@ -4,7 +4,12 @@ enum GoalCategory {
   skill,
   mindset;
 
-  String get label => name.toUpperCase();
+  String get label => switch (this) {
+    GoalCategory.body => 'ТЕЛО',
+    GoalCategory.money => 'ФИНАНСЫ',
+    GoalCategory.skill => 'НАВЫК',
+    GoalCategory.mindset => 'МЫШЛЕНИЕ',
+  };
 }
 
 class GoalModel {

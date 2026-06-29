@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/day_log_model.dart';
 import '../providers/log_provider.dart';
 import '../theme/app_theme.dart';
 import 'app_card.dart';
 
 class ReflectCard extends ConsumerStatefulWidget {
-  const ReflectCard({super.key, required this.log});
-
-  final DayLogModel log;
+  const ReflectCard({super.key});
 
   @override
   ConsumerState<ReflectCard> createState() => _ReflectCardState();
@@ -17,19 +14,14 @@ class ReflectCard extends ConsumerStatefulWidget {
 
 class _ReflectCardState extends ConsumerState<ReflectCard> {
   late final TextEditingController _controller;
+  String? _lastSavedReflection;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.log.reflection);
-  }
-
-  @override
-  void didUpdateWidget(covariant ReflectCard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.log.reflection != _controller.text) {
-      _controller.text = widget.log.reflection ?? '';
-    }
+    final log = ref.read(todayLogSyncProvider);
+    _controller = TextEditingController(text: log?.reflection);
+    _lastSavedReflection = log?.reflection;
   }
 
   @override
@@ -40,6 +32,14 @@ class _ReflectCardState extends ConsumerState<ReflectCard> {
 
   @override
   Widget build(BuildContext context) {
+    final log = ref.watch(todayLogSyncProvider);
+    if (log == null) return const SizedBox.shrink();
+    // Sync text field only when an external change arrives (e.g. app restart).
+    if (log.reflection != _lastSavedReflection &&
+        log.reflection != _controller.text) {
+      _controller.text = log.reflection ?? '';
+      _lastSavedReflection = log.reflection;
+    }
     return AppCard(
       padding: const EdgeInsets.all(22),
       child: Column(
@@ -51,14 +51,14 @@ class _ReflectCardState extends ConsumerState<ReflectCard> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  'REFLECT',
+                  'РЕФЛЕКСИЯ',
                   style: AppTheme.labelStyle.copyWith(
                     color: AppTheme.secondaryText,
                   ),
                 ),
               ),
               Text(
-                'SAVED',
+                'СОХРАНЕНО',
                 style: AppTheme.labelStyle.copyWith(
                   color: AppTheme.secondaryText,
                   letterSpacing: 2,
@@ -68,7 +68,7 @@ class _ReflectCardState extends ConsumerState<ReflectCard> {
           ),
           const SizedBox(height: 16),
           Text(
-            'What did today reveal about you?',
+            'Что сегодня открыло в тебе?',
             style: AppTheme.bodyStyle.copyWith(fontSize: 19, height: 1.25),
           ),
           const SizedBox(height: 14),
@@ -78,13 +78,13 @@ class _ReflectCardState extends ConsumerState<ReflectCard> {
             maxLines: 8,
             style: AppTheme.bodyStyle,
             onChanged: (value) {
+              _lastSavedReflection = value;
               ref
                   .read(logControllerProvider.notifier)
-                  .upsert(widget.log.copyWith(reflection: value));
-              ref.invalidate(todayLogProvider);
+                  .upsert(log.copyWith(reflection: value));
             },
             decoration: const InputDecoration(
-              hintText: 'WRITE ONE HONEST LINE',
+              hintText: 'НАПИШИ ОДНУ ЧЕСТНУЮ СТРОКУ',
             ),
           ),
         ],

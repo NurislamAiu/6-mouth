@@ -25,9 +25,9 @@ class ProgressOverview extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Expanded(
-                child: _Metric(label: 'DAY', value: '$day'),
+                child: _Metric(label: 'ДЕНЬ', value: '$day'),
               ),
-              _Metric(label: 'LEFT', value: '$daysLeft', alignEnd: true),
+              _Metric(label: 'ОСТАЛОСЬ', value: '$daysLeft', alignEnd: true),
             ],
           ),
           const SizedBox(height: 22),

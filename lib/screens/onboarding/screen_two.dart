@@ -19,10 +19,10 @@ class ScreenTwo extends ConsumerWidget {
     final state = ref.watch(onboardingStateProvider);
     return OnboardingLayout(
       step: 2,
-      title: 'What are you rebuilding first?',
-      subtitle: 'Choose the area where six months would change the most.',
+      title: 'Что ты трансформируешь первым?',
+      subtitle: 'Выбери область, где шесть месяцев изменят больше всего.',
       action: AppButton(
-        label: 'Continue',
+        label: 'Продолжить',
         onPressed: state.category == null ? null : onNext,
         filled: state.category != null,
       ),
@@ -95,10 +95,10 @@ class ScreenTwo extends ConsumerWidget {
 
   String _descriptionFor(GoalCategory category) {
     return switch (category) {
-      GoalCategory.body => 'Strength, energy, discipline.',
-      GoalCategory.money => 'Income, spending, control.',
-      GoalCategory.skill => 'Practice, output, mastery.',
-      GoalCategory.mindset => 'Confidence, focus, identity.',
+      GoalCategory.body => 'Сила, энергия, дисциплина.',
+      GoalCategory.money => 'Доход, траты, контроль.',
+      GoalCategory.skill => 'Практика, результат, мастерство.',
+      GoalCategory.mindset => 'Уверенность, фокус, идентичность.',
     };
   }
 }

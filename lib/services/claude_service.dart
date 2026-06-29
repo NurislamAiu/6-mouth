@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/goal_model.dart';
@@ -28,15 +29,26 @@ class ClaudeService {
     required GoalCategory category,
     required int monthNumber,
   }) async {
+    final topics = _loadTopics();
+    final topicsLine = topics.isNotEmpty
+        ? 'User motivation topics: ${topics.join(', ')}\n'
+        : '';
     final fallback = _fallbackTask(category, monthNumber);
     return _ask(
       'Create one specific task for today for a 6-month transformation plan.\n'
       'Category: ${category.label}\n'
       'Current month: $monthNumber of 6\n'
-      'Goal: $goal\n\n'
-      'Return only one actionable sentence under 18 words.',
+      'Goal: $goal\n'
+      '${topicsLine}'
+      '\nReturn only one actionable sentence under 18 words.',
       fallback: fallback,
     );
+  }
+
+  List<String> _loadTopics() {
+    final raw = Hive.box('app').get('motivationTopics');
+    if (raw is List) return raw.cast<String>();
+    return [];
   }
 
   Future<String> generateMonthlySummary({
@@ -55,7 +67,7 @@ class ClaudeService {
       'Reflections: ${reflections.join(' | ')}\n\n'
       'Be direct, calm, and motivating. Return exactly three sentences.',
       fallback:
-          'You are building proof through repeated action. This month showed where consistency is already forming and where friction still needs attention. Keep the next step small enough to finish today.',
+          'Ты строишь доказательства через повторяющиеся действия. Этот месяц показал, где уже формируется постоянство и где ещё есть трение. Держи следующий шаг достаточно маленьким, чтобы завершить его сегодня.',
     );
   }
 
@@ -94,20 +106,20 @@ class ClaudeService {
     return switch (category) {
       GoalCategory.body =>
         monthNumber <= 2
-            ? 'Complete one focused 30-minute workout.'
-            : 'Push one workout metric slightly beyond last week.',
+            ? 'Выполни одну сфокусированную тренировку 30 минут.'
+            : 'Улучши один показатель тренировки сверх прошлой недели.',
       GoalCategory.money =>
         monthNumber <= 2
-            ? 'Review your spending and remove one unnecessary cost.'
-            : 'Take one concrete action that increases income or savings.',
+            ? 'Проверь расходы и убери одну ненужную трату.'
+            : 'Сделай одно конкретное действие для роста дохода или сбережений.',
       GoalCategory.skill =>
         monthNumber <= 2
-            ? 'Practice your core skill for 45 uninterrupted minutes.'
-            : 'Create one small proof of your improving skill.',
+            ? 'Практикуй свой навык 45 минут без перерывов.'
+            : 'Создай одно маленькое доказательство улучшения навыка.',
       GoalCategory.mindset =>
         monthNumber <= 2
-            ? 'Write down one limiting belief and a truer replacement.'
-            : 'Do one uncomfortable action you have been avoiding.',
+            ? 'Запиши одно ограничивающее убеждение и замени его на более точное.'
+            : 'Сделай одно некомфортное действие, которое откладывал.',
     };
   }
 }

@@ -8,12 +8,12 @@ import '../theme/app_theme.dart';
 import 'app_card.dart';
 
 class CheckinCard extends ConsumerWidget {
-  const CheckinCard({super.key, required this.log});
-
-  final DayLogModel log;
+  const CheckinCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final log = ref.watch(todayLogSyncProvider);
+    if (log == null) return const SizedBox.shrink();
     return AppCard(
       padding: const EdgeInsets.all(22),
       child: Column(
@@ -24,7 +24,7 @@ class CheckinCard extends ConsumerWidget {
               Text('02', style: AppTheme.labelStyle),
               const SizedBox(width: 12),
               Text(
-                'IDENTITY CHECK',
+                'ПРОВЕРКА',
                 style: AppTheme.labelStyle.copyWith(
                   color: AppTheme.secondaryText,
                 ),
@@ -33,18 +33,18 @@ class CheckinCard extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'Did your actions match the person you are becoming?',
+            'Твои действия совпадают с тем, кем ты становишься?',
             style: AppTheme.bodyStyle.copyWith(fontSize: 19, height: 1.25),
           ),
           const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
-                child: _Choice(log: log, value: true, label: 'YES'),
+                child: _Choice(log: log, value: true, label: 'ДА'),
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: _Choice(log: log, value: false, label: 'NO'),
+                child: _Choice(log: log, value: false, label: 'НЕТ'),
               ),
             ],
           ),
@@ -69,7 +69,6 @@ class _Choice extends ConsumerWidget {
         ref
             .read(logControllerProvider.notifier)
             .upsert(log.copyWith(checkInAnswer: value));
-        ref.invalidate(todayLogProvider);
       },
       child: AnimatedContainer(
         duration: AppMotion.normal,
